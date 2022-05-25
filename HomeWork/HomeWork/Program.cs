@@ -6,8 +6,7 @@ namespace HomeWork
     {
         static void Main(string[] args)
         {
-            //  WineStorage.WineList();
-            WineStorage.wineArray();
+          
         }
     }
 }
