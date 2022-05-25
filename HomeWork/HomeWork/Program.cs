@@ -1,4 +1,5 @@
 ﻿using System;
+using Dictionary;
 
 namespace HomeWork
 {
@@ -6,7 +7,7 @@ namespace HomeWork
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Dictionary.Dictionary.WordList();
         }
     }
 }
