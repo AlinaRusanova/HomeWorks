@@ -12,7 +12,7 @@ namespace Wine
         public static T RandomEnum<T>()
         {
             var random = Enum.GetValues(typeof(T));
-            return (T)random.GetValue(EnumRandom.random.Next(random.Length));
+            return (T)random.GetValue(EnumRandom.random.Next(random.Length)); 
         }
     }
 }

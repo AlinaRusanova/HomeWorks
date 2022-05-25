@@ -11,6 +11,5 @@ namespace Wine
         Sweet,
         Dry,
         Normal
-
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using Wine;
 namespace HomeWork
 {
     class Program
@@ -7,7 +7,7 @@ namespace HomeWork
         static void Main(string[] args)
         {
             //  WineStorage.WineList();
-            WineStorage.wineArray();
+            Wine.WineStorage.wineArray();
         }
     }
 }

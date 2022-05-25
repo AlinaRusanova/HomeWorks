@@ -26,7 +26,7 @@ namespace Wine
         public void Appear()
         {
             Console.WriteLine($"This wine was produced in {WineYearOfProduction} year, it  is {WineType}, has {WineColor} color and {WineStrength} % Strength ");
-
+             
         }
 
     }

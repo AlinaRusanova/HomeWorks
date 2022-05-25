@@ -103,7 +103,7 @@ namespace Wine
             position = -1;
         }
 
-        object IEnumerator.Current => Current;
+        object IEnumerator.Current => Current; 
         public WineStorage GetEnumerator()
         {
             return new WineStorage(_bottle);

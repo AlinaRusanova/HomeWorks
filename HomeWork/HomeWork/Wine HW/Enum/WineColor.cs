@@ -11,7 +11,7 @@ namespace Wine
         White,
         Rose,
         Red
-    }
+    } 
 
 
 
