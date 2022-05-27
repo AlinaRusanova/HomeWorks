@@ -7,7 +7,7 @@ namespace FirstTask_RusanovaA
         static void Main(string[] args)
         {
 
-
+            First.Print();
         }
     }
 }
