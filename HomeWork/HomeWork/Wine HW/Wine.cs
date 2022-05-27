@@ -13,19 +13,22 @@ namespace Wine
         public int WineYearOfProduction { get; set; }
         public int WineStrength { get; set; }
 
-        public Wine(WineColor wineColor, WineType wineType, int wineYearOfProduction, int wineStrength)
+        public int _ID;
+
+        public Wine(int ID, WineColor wineColor, WineType wineType, int wineYearOfProduction, int wineStrength)
         {
             WineColor = wineColor;
             WineType = wineType;
             WineYearOfProduction = wineYearOfProduction;
             WineStrength = wineStrength;
+            _ID = ID;
         }
 
 
 
         public void Appear()
         {
-            Console.WriteLine($"This wine was produced in {WineYearOfProduction} year, it  is {WineType}, has {WineColor} color and {WineStrength} % Strength ");
+            Console.WriteLine($"{_ID}. This wine was produced in {WineYearOfProduction} year, it  is {WineType}, has {WineColor} color and {WineStrength} % Strength ");
              
         }
 
