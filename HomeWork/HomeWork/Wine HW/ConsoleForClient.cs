@@ -171,7 +171,7 @@ namespace Wine
                                 break;
                             case "white":
                             case "1":
-                                ChooseColor(WineColor.Red);
+                                ChooseColor(WineColor.White);
                                 break;
                         }
                         Console.WriteLine("Would you like to order?");
