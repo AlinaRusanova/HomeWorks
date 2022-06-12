@@ -9,17 +9,25 @@ namespace GuessingGame
     //public static  Random rn = new Random();
     public class SimplePlayers : GeneralPlayer
     {
-        Random rn = new Random();
-        public override int Roll(int min,int max)
+
+        public  override void Roll(/*int min, int max, int count*/)
         {
+            int[] simleAnswerArray = new int[count];
             int simpleAnswer = min;
 
-            do 
-            { 
-             
+            do
+            {
+                for (int i = min; i < max; i++)
+                {
+                    simleAnswerArray[i] = simpleAnswer;
+                    Console.WriteLine(simleAnswerArray[i]);
+                    simpleAnswer++;
+                }
+
             }
-            while ()
-            return ;
+            while (simpleAnswer != max);
+           // return simpleAnswer;
+
         }
-    }
+}
 }

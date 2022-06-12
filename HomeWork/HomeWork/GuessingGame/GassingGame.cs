@@ -12,7 +12,8 @@ namespace GuessingGame
         
        public const int min = 1;
         public const int max = 9;
-         public static int guessNumber;     
+        public const int count = max-min+1;
+        public static int guessNumber;     
 
         public static int RandomNumber()
         { 

@@ -9,17 +9,17 @@ namespace GuessingGame
   abstract class GeneralPlayer
     {
 
-        private string _name;
-        public GeneralPlayer(string name)
-        {
-            _name = name;
-        }
-        public abstract int Roll(int min,int max);
+        //private string _name;
+        //public GeneralPlayer(string name)
+        //{
+        //    _name = name;
+        //}
+        public abstract void Roll(/*int min,int max, int count*/);
       
 
-        public void ShowInfo()
-        {
-            Console.WriteLine(GetType().Name);
-        }
+        //public void ShowInfo()
+        //{
+        //    Console.WriteLine(GetType().Name);
+        //}
     }
 }
