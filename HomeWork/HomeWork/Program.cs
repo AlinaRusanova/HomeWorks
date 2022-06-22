@@ -7,7 +7,7 @@ namespace HomeWork
         static void Main(string[] args)
         {
            
-        GuessingGame.GassingGame.RandomNumber();
+        GuessingGame.GuessingGame.Start();
         }
     }
 }
