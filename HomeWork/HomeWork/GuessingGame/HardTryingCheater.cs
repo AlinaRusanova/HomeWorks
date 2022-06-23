@@ -9,11 +9,7 @@ namespace GuessingGame
     class HardTryingCheater : Player
     {
         private int _currentPosition;
-        public HardTryingCheater(string name, IHashCollection hashCollection) : base(name, hashCollection)
-        {
-
-        }
-
+      
         public HardTryingCheater(string name, int CurPos, IHashCollection hashCollection) : base(name, hashCollection)
         {
 

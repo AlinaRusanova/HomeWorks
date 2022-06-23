@@ -8,7 +8,7 @@ namespace GuessingGame
 {
     class HashCollection : IHashCollection
     {
-        private HashSet<int> _hashCollection = new HashSet<int>();
+        private static HashSet<int> _hashCollection = new HashSet<int>();
         private readonly object _lock = new object();
 
 
@@ -37,7 +37,7 @@ namespace GuessingGame
         public string GetCollection()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (var number in _hashCollection.Distinct().OrderBy(x => x))
+            foreach (var number in _hashCollection.OrderBy(x => x))
             {
                 sb.AppendLine($"{number}");
             }

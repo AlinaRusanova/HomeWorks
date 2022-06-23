@@ -9,10 +9,6 @@ namespace GuessingGame
     class HardTryingPlayer : Player
     {
         private int _currentPosition;
-        public HardTryingPlayer(string name, IHashCollection hashCollection) : base(name, hashCollection)
-        {
-
-        }
 
         public HardTryingPlayer(string name, int CurPos, IHashCollection hashCollection) : base(name, hashCollection)
         {
