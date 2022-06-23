@@ -9,6 +9,7 @@ namespace HomeWork
     {
         static void Main(string[] args)
         {
+
             var sw = Stopwatch.StartNew();
 
             try
@@ -30,6 +31,7 @@ namespace HomeWork
 
             Console.WriteLine(sw.Elapsed);
 
+            Console.ReadLine();
 
             //  Racing.Racing.StartRacing();
         }

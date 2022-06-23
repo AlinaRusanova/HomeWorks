@@ -1,85 +1,87 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using HomeWork;
 
-
 namespace Racing
 {
-    public class Car
+    public class Racing
     {
-        public string _name;
-        public int _speed;
-        public ConsoleColor _carColor;
-        public char _carSymbol;
+        //  static object block = new object();
+        //  static Random rn = new Random();
+        private const int Distance = 1000;
 
-        public int _carPosition;
-        private int _progress;
-        private static readonly object _syncLock = new();
-        public Car(string name, int speed, ConsoleColor carColor, char carSymbol)
-        {
-            _name = name;
-            _speed = speed;
-            _carColor = carColor;
-            //  _carPosition = carPosition;
-            _carSymbol = carSymbol;
-        }
-
-
-        //public byte Color
+        //internal void Start()
         //{
-        //    get => _carColor;
-        //    set
-        //    {
-        //        if (value is >= 0 and < 16)
-        //            _carColor = value;
-        //        else
-        //            throw new InvalidOperationException("Value be between 0 and 15");
-        //    }
+        //    throw new NotImplementedException();
         //}
 
+        private static CancellationTokenSource _cts = new();
 
-        public Task Appear(int position, int distance, CancellationToken token = default)
+        public static List<Car> _raceCars; // создаем список машин используя конструктор класса 
+        private static readonly char[] carSymbol = { '%', '$', '#', '8', 'O', '&', '@', '+' };   // массив из символв как будет выглядеть машина
+
+
+
+        public static int position = 2;
+
+        public void StartRacing()
         {
-            lock (_syncLock)
+            Field();
+            var tasks = new List<Task>();
+
+            foreach (var raceCar in _raceCars)
             {
-                $"Driver : {_name}".PrintAt(_progress, position - 1, _carColor);
-                "|".PrintAt(distance / 10 + 1, position, ConsoleColor.White);
+                var pos = position;
+                tasks.Add(new Task(() => raceCar.Appear(pos, Distance, _cts.Token)));
+                position += 2;
             }
 
-            while (!token.IsCancellationRequested)
+            tasks.ForEach(t => t.Start());  // запускаем потоки
+            Task.WaitAny(tasks.ToArray());  // ожидае когда какой либо из потоков придет к финишу чтобі закончить програму
+            _cts.Cancel();
+
+
+        }
+
+        public /*static void*/ Racing(string[] namePlayers)
+        {
+            _raceCars = new List<Car>(namePlayers.Length);
+
+            for (int i = 0; i < namePlayers.Length; i++)
             {
-                lock (_syncLock)
+                _raceCars.Add(new Car(namePlayers[i], GetRandomBetween(40, 120), (ConsoleColor)GetRandomBetween(1, 15), carSymbol[i])
                 {
-                    var sb = new StringBuilder();
-
-                    for (var j = 0; j <= _progress; j++) sb.Append(_progress != j ? " " : _carSymbol);
-
-                    sb.ToString().PrintAt(0, position, _carColor);
-                    _progress++;
-
-                    if (distance < _progress * 10) break; // 
-                }
-
-                Thread.Sleep(distance / _speed * 20);
+                    //_name = namePlayers[i],
+                    //_carSymbol = carSymbol[i]
+                });
             }
-
-            return Task.CompletedTask;
         }
 
 
+
+        public static void Field()
+        {
+            //  var tasks = new List<Task>();
+            //  int position = 2;
+            int position2 = position * 40;
+
+           '_'.GetStrWithLength(100).PrintAt(0,0,ConsoleColor.DarkRed);
+
+            '_'.GetStrWithLength(100).PrintAt(0, 15, ConsoleColor.DarkRed);
+
+        }
+
+        public static int GetRandomBetween(int start, int end)
+        {
+            return new Random().Next(start, end);
+        }
+
     }
+
 }
-//Console.SetCursorPosition(_carPosition, 0);
-//Console.Write(_name);
-
-//for (int i = 1; i < 10; i++)
-//{
-
-//    Thread.Sleep(100000 / _speed);
-//    Console.ForegroundColor = (ConsoleColor)_carColor;
-//    Console.SetCursorPosition(_carPosition, i);
-//    Console.Write(_carSymbol);
-//    Console.ResetColor();
-//    // Console.Clear();
+// создать массив из имен
+// 
