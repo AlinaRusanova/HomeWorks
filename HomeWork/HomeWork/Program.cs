@@ -14,7 +14,7 @@ namespace HomeWork
 
             try
             {
-                new Racing.Racing(new[] { "Dima", "Nata", "Alina", "Tanya", "Simba", "Den", "Anton" }).StartRacingTask();
+                new Racing.Racing(new[] { "Dima", "Nata", "Alina", "Tanya", "Simba", "Den", "Anton" }).StartRacingTask();  // or   .StartRacingParallel()
             }
 
             catch (Exception e)
