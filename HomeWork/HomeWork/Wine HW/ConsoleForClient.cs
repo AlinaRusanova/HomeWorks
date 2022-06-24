@@ -16,9 +16,9 @@ namespace Wine
         }
 
 
-        public static List<Wine> ShowAll()
+        public static List<Wine> ShowAll(List<Wine> allWineList)
         {
-            var allWineList = WineStorage.WineList();
+            //var allWineList = WineStorage.WineList();
 
             Console.WriteLine($"We can offer to you such bottle as: ");
 
@@ -31,9 +31,9 @@ namespace Wine
         }
 
 
-        public static List<Wine> ChooseType(WineType type)
+        public static List<Wine> ChooseType(List<Wine> allWineList, WineType type)
         {
-            var selectedType = WineStorage.WineList().Where(wb => wb.WineType == type).ToList();
+            var selectedType = allWineList.Where(wb => wb.WineType == type).ToList();
 
             Console.WriteLine($"We can offer to you such bottle as: ");
 
@@ -48,9 +48,9 @@ namespace Wine
 
 
 
-        public static List<Wine> ChooseColor(WineColor color)
+        public static List<Wine> ChooseColor(List<Wine> allWineList, WineColor color)
         {
-            var selectedColor =  WineStorage.WineList().Where(wb => wb.WineColor == color).ToList();
+            var selectedColor = allWineList.Where(wb => wb.WineColor == color).ToList();
 
             Console.WriteLine($"We can offer to you such bottle as: ");
 
@@ -62,9 +62,9 @@ namespace Wine
             return selectedColor;
         }
 
-        public static List<Wine> FullChoosen  (WineColor color, WineType type, int year, int strength)
+        public static List<Wine> FullChoosen  (List<Wine> allWineList, WineColor color, WineType type, int year, int strength)
         {
-            var selectedAll = WineStorage.WineList().Where(wb => wb.WineColor == color && wb.WineType == type && wb.WineYearOfProduction == year && wb.WineStrength == strength).ToList();
+            var selectedAll = allWineList.Where(wb => wb.WineColor == color && wb.WineType == type && wb.WineYearOfProduction == year && wb.WineStrength == strength).ToList();
 
             Console.WriteLine($"We can offer to you such bottle as: ");
 
@@ -76,9 +76,9 @@ namespace Wine
             return selectedAll;
         }
 
-        public static List<Wine> SortByYear()
+        public static List<Wine> SortByYear(List<Wine> allWineList)
         {
-            var selectedAll = WineStorage.WineList().OrderBy(wb => wb.WineYearOfProduction).ToList();
+            var selectedAll = allWineList.OrderBy(wb => wb.WineYearOfProduction).ToList();
 
             Console.WriteLine($"We can offer to you such bottle as: ");
 
@@ -90,9 +90,9 @@ namespace Wine
             return selectedAll;
         }
 
-        public static List<Wine> SortByStrenght()
+        public static List<Wine> SortByStrenght(List<Wine> allWineList)
         {
-            var selectedAll = WineStorage.WineList().OrderBy(wb => wb.WineStrength).ToList();
+            var selectedAll = allWineList.OrderBy(wb => wb.WineStrength).ToList();
 
             Console.WriteLine($"We can offer to you such bottle as: ");
 
@@ -107,7 +107,9 @@ namespace Wine
 
         public static void Final()
         {
+            var allWineList = WineStorage.WineList();
             Console.ForegroundColor = ConsoleColor.Cyan;
+
             Console.WriteLine($"Welcome to 'World of Wine shop! Please choose how would you want to chek WineList: \n" +
                 $"\t 1. All Wine list \n" +
                 $" \t 2. Choose color \n" +
@@ -129,7 +131,7 @@ namespace Wine
                     case "All":
                     case "1. All Wine list":
                     case "All Wine list":
-                        ShowAll();
+                        ShowAll(allWineList);
                         Console.WriteLine("Would you like to order?");
                         break;
 
@@ -163,15 +165,15 @@ namespace Wine
                         {
                             case "rose":
                             case "2":
-                                ChooseColor(WineColor.Rose);
+                                ChooseColor(allWineList,WineColor.Rose);
                                 break;
                             case "red":
                             case "3":
-                                ChooseColor(WineColor.Red);
+                                ChooseColor(allWineList,WineColor.Red);
                                 break;
                             case "white":
                             case "1":
-                                ChooseColor(WineColor.White);
+                                ChooseColor(allWineList,WineColor.White);
                                 break;
                         }
                         Console.WriteLine("Would you like to order?");
@@ -199,17 +201,17 @@ namespace Wine
 
                         switch (Console.ReadLine()?.ToLower())
                         {
-                            case "Dry":
+                            case "dry":
                             case "2":
-                                ChooseType(WineType.Dry);
+                                ChooseType(allWineList, WineType.Dry);
                                 break;
                             case "semisweet":
                             case "3":
-                                ChooseType(WineType.Semisweet);
+                                ChooseType(allWineList, WineType.Semisweet);
                                 break;
                             case "white":
                             case "1":
-                                ChooseType(WineType.Sweet);
+                                ChooseType(allWineList, WineType.Sweet);
                                 break;
                         }
                         Console.WriteLine("Would you like to order?");
@@ -234,7 +236,7 @@ namespace Wine
                     case "Sort by year ":
                     case "Sortbyyear ":                  
 
-                        SortByYear();
+                        SortByYear(allWineList);
                         Console.WriteLine("Would you like to order?");
                         break;
 
@@ -245,7 +247,7 @@ namespace Wine
                     case "Sort by strenght":
                     case "Sortbystrenght":
 
-                        SortByStrenght();
+                        SortByStrenght(allWineList);
                         Console.WriteLine("Would you like to order?");
                         break;
 
@@ -261,7 +263,7 @@ namespace Wine
                 Console.WriteLine(ex.Message);
             }
 
-
+            Console.ReadLine();
         }
 
 
