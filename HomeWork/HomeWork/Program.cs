@@ -14,7 +14,7 @@ namespace HomeWork
 
             try
             {
-                new Racing.Racing(new[] { "Dima", "Nata", "Alina", "Tanya", "Simba", "Den", "Anton" }).StartRacing();
+                new Racing.Racing(new[] { "Dima", "Nata", "Alina", "Tanya", "Simba", "Den", "Anton" }).StartRacingTask();
             }
 
             catch (Exception e)
@@ -33,7 +33,7 @@ namespace HomeWork
 
             Console.ReadLine();
 
-            //  Racing.Racing.StartRacing();
+            
         }
     }
 }

@@ -26,9 +26,10 @@ namespace Racing
 
 
 
-        public static int position = 2;
+        public static int position = 2; // базовая позиция для тасков
+        public static int positionPar = 0; // базовая позиция для параллели
 
-        public void StartRacing()
+        public void StartRacingTask()
         {
             Field();
             var tasks = new List<Task>();
@@ -40,16 +41,40 @@ namespace Racing
                 position += 2;
             }
 
-            tasks.ForEach(t => t.Start());  // запускаем потоки
-            Task.WaitAny(tasks.ToArray());  // ожидае когда какой либо из потоков придет к финишу чтобі закончить програму
+           tasks.ForEach(t => t.Start());  // запускаем потоки
+           Task.WaitAny(tasks.ToArray());  // ожидае когда какой либо из потоков придет к финишу чтобі закончить програму
+           
             _cts.Cancel();
+
+        }
+
+
+        public void StartRacingParallel()
+        {
+            Field();
+
+            Parallel.ForEach(_raceCars, new ParallelOptions
+            {
+                MaxDegreeOfParallelism = _raceCars.Count()
+            }, raceCar =>
+            {
+                raceCar.AppearParallel(positionPar +=2, Distance, _cts);
+                _cts.Cancel();
+            }); 
+
+
 
 
         }
 
-        public /*static void*/ Racing(string[] namePlayers)
+
+
+
+
+        public Racing(string[] namePlayers)
         {
             _raceCars = new List<Car>(namePlayers.Length);
+
 
             for (int i = 0; i < namePlayers.Length; i++)
             {
@@ -61,6 +86,7 @@ namespace Racing
             }
         }
 
+        
 
 
         public static void Field()

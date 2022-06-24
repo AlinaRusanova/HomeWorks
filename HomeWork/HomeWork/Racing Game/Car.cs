@@ -17,6 +17,7 @@ namespace Racing
         public int _carPosition;
         private int _progress;
         private static readonly object _syncLock = new();
+        private static CancellationTokenSource _cancellationTokenSource = new();
         public Car(string name, int speed, ConsoleColor carColor, char carSymbol)
         {
             _name = name;
@@ -55,7 +56,7 @@ namespace Racing
             return Task.CompletedTask;
         }
 
-        public void AppearParallel(int position, int distance, CancellationToken token = default)
+        public void AppearParallel(int position, int distance, CancellationTokenSource _cancellationTokenSource)
         {
             lock (_syncLock)
             {
@@ -63,22 +64,31 @@ namespace Racing
                 "|".PrintAt(distance / 10 + 1, position, ConsoleColor.White);
             }
 
-            while (!token.IsCancellationRequested)
+
+            do
             {
-                lock (_syncLock)
+                if (_cancellationTokenSource.IsCancellationRequested)
+                    return;
+
+                else
                 {
-                    var sb = new StringBuilder();
+                    lock (_syncLock)
+                    {
+                        
+                        var sb = new StringBuilder();
 
-                    for (var j = 0; j <= _progress; j++) sb.Append(_progress != j ? " " : _carSymbol);
+                        for (var j = 0; j <= _progress; j++) sb.Append(_progress != j ? " " : _carSymbol);
 
-                    sb.ToString().PrintAt(0, position, _carColor);
-                    _progress++;
-
-                    if (distance < _progress * 10) break; // 
+                        sb.ToString().PrintAt(0, position, _carColor);
+                        _progress++;
+                    }
+                    Thread.Sleep(distance / _speed * 20);
                 }
-
-                Thread.Sleep(distance / _speed * 20);
             }
+            while (distance >= _progress * 10);
+            _cancellationTokenSource.Cancel();
+
+           
 
            // return Task.CompletedTask;
         }
