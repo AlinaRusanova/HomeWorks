@@ -110,17 +110,21 @@ namespace Wine
             var allWineList = WineStorage.WineList();
             Console.ForegroundColor = ConsoleColor.Cyan;
 
-            Console.WriteLine($"Welcome to 'World of Wine shop! Please choose how would you want to chek WineList: \n" +
+            Console.WriteLine($"Welcome to 'World of Wine shop!");
+
+            Menu:
+              Console.WriteLine($"  Please choose how would you want to chek WineList: \n" +
                 $"\t 1. All Wine list \n" +
                 $" \t 2. Choose color \n" +
                 $" \t 3. Choose type \n" +
           //      $" \t 4. Choose color,type,year of production and strenght \n" +
                 $" \t 4. Sort by year \n" +
-                $" \t 5. Sort by strength \n");
+                $" \t 5. Sort by strength \n"+
+                 $" \t 6. Make an order \n");
+
 
             Console.ResetColor();
 
-          //  string answer = Console.ReadLine();
 
             try
             {
@@ -132,8 +136,9 @@ namespace Wine
                     case "1. All Wine list":
                     case "All Wine list":
                         ShowAll(allWineList);
-                        Console.WriteLine("Would you like to order?");
-                        break;
+                        Console.WriteLine();
+                        //  break;
+                        goto Menu;
 
                     case "2":
                     case "2.":
@@ -176,8 +181,9 @@ namespace Wine
                                 ChooseColor(allWineList,WineColor.White);
                                 break;
                         }
-                        Console.WriteLine("Would you like to order?");
-                        break;
+                        Console.WriteLine();
+                        //  break;
+                        goto Menu;
 
 
                     case "3":
@@ -214,9 +220,10 @@ namespace Wine
                                 ChooseType(allWineList, WineType.Sweet);
                                 break;
                         }
-                        Console.WriteLine("Would you like to order?");
-                        break;
-                     
+                        Console.WriteLine();
+                        //  break;
+                        goto Menu;
+
 
 
                     //case "4":
@@ -237,8 +244,9 @@ namespace Wine
                     case "Sortbyyear ":                  
 
                         SortByYear(allWineList);
-                        Console.WriteLine("Would you like to order?");
-                        break;
+                        Console.WriteLine();
+                        //  break;
+                        goto Menu;
 
 
                     case "5":
@@ -248,11 +256,23 @@ namespace Wine
                     case "Sortbystrenght":
 
                         SortByStrenght(allWineList);
-                        Console.WriteLine("Would you like to order?");
+                        break;
+
+                    case "6":
+                    case "6.":
+                    case "6. make an order":
+                    case "order":
+                    case "make an order":
+
+                        Console.WriteLine("Введите Ваши данные и наш менеджер свяжется с Вами для оформления заказа");
+                        Console.ReadLine();
+                        Console.WriteLine("Спасибо! В течение часа наш менеджер Вам позвонит для уточнения заказа");
                         break;
 
                     default: Console.WriteLine("Please do your choose");
-                        break;
+                        Console.WriteLine();
+                        //  break;
+                        goto Menu;
 
                 }
             }
@@ -263,6 +283,7 @@ namespace Wine
                 Console.WriteLine(ex.Message);
             }
 
+            
             Console.ReadLine();
         }
 
