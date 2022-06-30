@@ -1,4 +1,5 @@
 ﻿using System;
+using HomeWork.ChoosingTeam;
 
 namespace HomeWork
 {
@@ -6,7 +7,7 @@ namespace HomeWork
     {
         static void Main(string[] args)
         {
-          
+            Start.StartBuildingTeams();
         }
     }
 }
